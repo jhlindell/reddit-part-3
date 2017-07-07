@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <p><a class="btn btn-info" ng-click="$ctrl.show = !$ctrl.show">New Post</a></p>
+    </div>
+    <ul class="nav nav-pills">
+      <li role="presentation" class="active">
+        <input type="search" class="form-control input-sm search-form" placeholder="Filter" ng-model="filterBy">
+      </li>
+      <li>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <a>{{$ctrl.sorter}}</a>
+        <span class="caret"></span>
+        </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a ng-click="$ctrl.sortBy='-vote_count'; $ctrl.sorter='Sort By Votes'">Votes</a></li>
+            <li><a ng-click="$ctrl.sortBy='-created_at'; $ctrl.sorter='Sort By Date'">Date</a></li>
+            <li><a ng-click="$ctrl.sortBy='title'; $ctrl.sorter='Sort By Title'">Title</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+<div ng-if="$ctrl.show">
+    <formcomponent allposts="$ctrl.posts"></formcomponent>
+</div>
+    <div ng-repeat="post in $ctrl.posts | filter: {title: filterBy} | orderBy: $ctrl.sortBy">
+      <post postdata="post"></post>
+    </div>
+  </div>
+</div>

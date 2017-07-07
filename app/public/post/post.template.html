@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <div class="media-left">
+        <img class="media-object" ng-src="{{$ctrl.postdata.image_url}}">
+        <a ui-sref="formcomponent({id:$ctrl.postdata.id})">edit</a>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">
+          {{$ctrl.postdata.title}}
+          |
+          <a><i class="glyphicon glyphicon-arrow-up" ng-click="$ctrl.upvote()"></i></a>
+          <a><i class="glyphicon glyphicon-arrow-down" ng-click="$ctrl.downvote()"></i></a>
+          {{$ctrl.postdata.vote_count}}
+        </h4>
+        <div class="text-right">
+          {{$ctrl.postdata.author}}
+        </div>
+        <p>
+          {{$ctrl.postdata.body}}
+        </p>
+        <div>
+          <time am-time-ago="post.created_at"></time> |
+          <i class="glyphicon glyphicon-comment"></i>
+          <a ng-click="$ctrl.showHideComments()">
+            {{$ctrl.postdata.comments.length}} Comments
+          </a>
+        </div>
+        <comment commentdata="$ctrl.postdata"></comment>
+      </div>
+    </div>
+  </div>
+</div>

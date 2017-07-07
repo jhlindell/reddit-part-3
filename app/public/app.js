@@ -1,6 +1,7 @@
 (function() {
   'use strict';
-  angular.module("app", ['ui.router','angularMoment']).config(config);
+  angular.module("app", ['ui.router','angularMoment'])
+    .config(config);
 
   config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
@@ -10,12 +11,13 @@
       .state({
         name: 'home',
         url: '/',
-        component: 'newPost'
+        component: 'postList'
       })
       .state({
-        name: 'edit',
+        // parent: 'app',
+        name: 'formcomponent',
         url: '/posts/:id/edit',
-        component: 'editPost'
+        component: 'formcomponent'
       });
   }
 }());
