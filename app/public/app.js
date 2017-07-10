@@ -14,7 +14,6 @@
         component: 'postList'
       })
       .state({
-        // parent: 'app',
         name: 'formcomponent',
         url: '/posts/:id/edit',
         component: 'formcomponent'
