@@ -8,8 +8,8 @@
     controller: postController
   });
 
-  postController.$inject = ['$http'];
-  function postController($http) {
+  postController.$inject = ['$http', 'postServices'];
+  function postController($http, postServices) {
   const vm = this;
 
   vm.$onInit = function(){
@@ -17,14 +17,14 @@
   };
 
   vm.upvote = function() {
-    $http.post(`api/posts/${vm.postdata.id}/votes`).then(function(response){
+    postServices.upVote(vm.postdata.id).then(function(response) {
       vm.postdata.vote_count++;
     });
   };
 
   vm.downvote = function() {
     if (vm.postdata.vote_count > 0) {
-      $http.delete(`api/posts/${vm.postdata.id}/votes`).then(function(response){
+      postServices.downVote(vm.postdata.id).then(function(response){
         vm.postdata.vote_count--;
       });
     }

@@ -8,7 +8,8 @@
     }
   });
 
-  function commentController($http) {
+  commentController.$inject = ['postServices'];
+  function commentController(postServices) {
   const vm = this;
 
   vm.$onInit = function() {
@@ -16,7 +17,7 @@
   };
 
   vm.newComment = function(post) {
-    $http.post(`/api/posts/${vm.commentdata.id}/comments`, {content: vm.cmtInput}).then(response => {
+    postServices.postComment(vm.commentdata.id, vm.cmtInput).then(response => {
       vm.commentdata.comments.push(response.data);
     });
     delete vm.cmtInput;
