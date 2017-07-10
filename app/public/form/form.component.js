@@ -4,7 +4,8 @@
     templateUrl: 'form/form.template.html',
     controller: formController,
     bindings: {
-      allposts: "="
+      allposts: "=",
+      toggle: "="
     }
   });
 
@@ -13,7 +14,6 @@
   const vm = this;
 
   vm.$onInit = function(){
-    console.log(vm.allposts);
     var id= $stateParams.id;
     if(id !== undefined){
       vm.updateOrPost = "Update";
@@ -55,7 +55,7 @@
       response.data.cmtInput = '';
       vm.allposts.push(response.data);
       delete vm.post;
-      vm.show = false;
+      vm.toggle = false;
     });
   };
 }

@@ -5,11 +5,10 @@
     .module('app')
     .service('postServices', service);
 
-  function service() {
+  service.inject = ['$http'];
+  function service($http) {
     this.getAll = function(){
-      $http.get('/api/posts').then(response => {
-        return response.data;
-      });
+      return $http.get('/api/posts').then(response => response.data);
     };
   }
 
