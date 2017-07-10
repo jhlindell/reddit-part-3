@@ -23,7 +23,7 @@
     </ul>
 
 <div ng-if="$ctrl.show">
-    <formcomponent allposts="$ctrl.posts"></formcomponent>
+    <formcomponent toggle="$ctrl.show" allposts="$ctrl.posts"></formcomponent>
 </div>
     <div ng-repeat="post in $ctrl.posts | filter: {title: filterBy} | orderBy: $ctrl.sortBy">
       <post postdata="post"></post>

@@ -8,6 +8,7 @@
     controller: postController
   });
 
+  postController.$inject = ['$http'];
   function postController($http) {
   const vm = this;
 
@@ -16,12 +17,16 @@
   };
 
   vm.upvote = function() {
-    vm.postdata.vote_count++;
+    $http.post(`api/posts/${vm.postdata.id}/votes`).then(function(response){
+      vm.postdata.vote_count++;
+    });
   };
 
   vm.downvote = function() {
     if (vm.postdata.vote_count > 0) {
-      vm.postdata.vote_count--;
+      $http.delete(`api/posts/${vm.postdata.id}/votes`).then(function(response){
+        vm.postdata.vote_count--;
+      });
     }
   };
 

@@ -14,20 +14,47 @@
 
   vm.$onInit = function(){
     console.log(vm.allposts);
+    var id= $stateParams.id;
+    if(id !== undefined){
+      vm.updateOrPost = "Update";
+      vm.loadForEdit();
+    } else {
+      vm.updateOrPost = "Create Post";
+    }
+  };
+
+  vm.postOrPatch = function(){
+    if($stateParams.id !== undefined){
+      vm.patchPost();
+    } else {
+      vm.createNewPost();
+    }
+  };
+
+  vm.patchPost = function(){
+    $http.patch(`api/posts/${$stateParams.id}`, vm.post).then(function(response){
+      $state.go('home');
+    });
+  };
+
+  vm.loadForEdit = function(){
+    $http.get(`api/posts/${$stateParams.id}`).then(function(response){
+      vm.post = response.data;
+    });
   };
 
   vm.createNewPost = function() {
-    vm.newPost.created_at = new Date();
-    vm.newPost.vote_count = 0;
-    vm.newPost.comments = [];
+    vm.post.created_at = new Date();
+    vm.post.vote_count = 0;
+    vm.post.comments = [];
 
-    $http.post('api/posts', vm.newPost).then(response => {
+    $http.post('api/posts', vm.post).then(response => {
       response.data.numComments = 0;
       response.data.comments = [];
       response.data.showComments = false;
       response.data.cmtInput = '';
       vm.allposts.push(response.data);
-      delete vm.newPost;
+      delete vm.post;
       vm.show = false;
     });
   };
