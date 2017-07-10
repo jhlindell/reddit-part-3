@@ -19,5 +19,13 @@
       });
     };
 
+    vm.removePost = function(post){
+      console.log("delete ", post.id);
+      for(let i = 0; i < vm.posts.length; i++){
+        if(vm.posts[i].id === post.id){
+          vm.posts.splice(i, 1);
+        }
+      }
+    };
   }
 })();

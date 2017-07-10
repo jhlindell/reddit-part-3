@@ -2,7 +2,8 @@
   'use strict';
   angular.module("app").component("post", {
     bindings: {
-      postdata: '='
+      postdata: '=',
+      remove: '&'
     },
     templateUrl: 'post/post.template.html',
     controller: postController
@@ -32,6 +33,12 @@
 
   vm.showHideComments = function() {
     vm.postdata.showComments = !vm.postdata.showComments;
+  };
+
+  vm.deletePost = function(){
+    postServices.deletePost(vm.postdata.id).then(function(){
+      vm.remove(vm.postdata);
+    });
   };
 }
 })();

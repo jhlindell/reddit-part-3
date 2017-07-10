@@ -4,6 +4,7 @@
       <div class="media-left">
         <img class="media-object" ng-src="{{$ctrl.postdata.image_url}}">
         <a ui-sref="formcomponent({id:$ctrl.postdata.id})">edit</a>
+        <a ng-click="$ctrl.deletePost()">delete</a>
       </div>
       <div class="media-body">
         <h4 class="media-heading">

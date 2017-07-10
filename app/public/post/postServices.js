@@ -34,6 +34,10 @@
     this.patchPost = function(id, post) {
       return $http.patch(`api/posts/${id}`, post).then(response => response);
     };
+
+    this.deletePost = function(id) {
+      return $http.delete(`api/posts/${id}`).then(response => response);
+    };
   }
 
 
