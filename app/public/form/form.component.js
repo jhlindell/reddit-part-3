@@ -9,8 +9,8 @@
     }
   });
 
-  formController.$inject = ['$http', '$stateParams', '$state'];
-  function formController($http, $stateParams, $state) {
+  formController.$inject = ['$http', '$stateParams', '$state', 'postServices'];
+  function formController($http, $stateParams, $state, postServices) {
   const vm = this;
 
   vm.$onInit = function(){
@@ -38,8 +38,8 @@
   };
 
   vm.loadForEdit = function(){
-    $http.get(`api/posts/${$stateParams.id}`).then(function(response){
-      vm.post = response.data;
+    postServices.getSingle($stateParams.id).then(function(response){
+      vm.post = response;
     });
   };
 

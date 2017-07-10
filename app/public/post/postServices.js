@@ -10,6 +10,12 @@
     this.getAll = function(){
       return $http.get('/api/posts').then(response => response.data);
     };
+
+    this.getSingle = function(id) {
+      return $http.get(`api/posts/${id}`).then(response => response.data);
+    };
+
   }
+
 
 }());
